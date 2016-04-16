@@ -8,20 +8,33 @@ import MovieUtils from '../lib/MovieUtils'
 
 import AppBar from 'material-ui/lib/app-bar'
 import GridList from 'material-ui/lib/grid-list/grid-list'
-import CircularProgress from 'material-ui/lib/circular-progress'
+import RefreshIndicator from 'material-ui/lib/refresh-indicator'
 import IconButton from 'material-ui/lib/icon-button'
 import RefreshButton from 'material-ui/lib/svg-icons/navigation/refresh'
 
-let styles = {
-    root: {
+const styles = {
+    contentWrapper: {
+        position: 'relative'
+    },
+    refreshWrapper: {
+        position: 'relative',
         display: 'flex',
         flexWrap: 'wrap',
         justifyContent: 'space-around',
+        alignItems: 'center',
+        height: '70vh'
+    },
+    listGridWrapper: {
+        
     },
     gridList: {
         width: '100%',
         marginBottom: 24,
     },
+    refresh: {
+        display: 'inline-block',
+        position: 'relative'
+    }
 }
 
 class MovieListView extends Component {
@@ -88,7 +101,7 @@ class MovieListView extends Component {
         )
 
         return (
-            <div styles={styles.root}>
+            <div>
                 <AppBar 
                     title="Movies App"
                     iconElementRight={refreshButton} 
@@ -101,18 +114,30 @@ class MovieListView extends Component {
                     <TabOrderBy selectedTab={this.state.orderBy} onClick={this.onOrderByClick.bind(this)} text="Rating" orderBy="rating" />
                 </div>
                 
-                {
-                    this.state.loading ?
-                        <CircularProgress mode="indeterminate" />
-                        :
-                        <GridList cellHeight={200} style={styles.gridList}>
-                        {
-                            movies.map((movie) => {
-                                return <MovieItem key={`movie-${movie.id}`} movie={movie} onClick={this.showMovieDetail.bind(this)} />
-                            })
-                        }
-                        </GridList>
-                }
+                <div style={styles.contentWrapper}>
+                    {
+                        this.state.loading ?
+                            <div style={styles.refreshWrapper}>
+                                <RefreshIndicator
+                                    size={50}
+                                    left={0}
+                                    top={0}
+                                    status="loading"
+                                    percentage={60}
+                                    style={styles.refresh} />
+                            </div>
+                            :
+                            <div style={styles.listGridWrapper}>
+                                <GridList cellHeight={200} style={styles.gridList}>
+                                {
+                                    movies.map((movie) => {
+                                        return <MovieItem key={`movie-${movie.id}`} movie={movie} onClick={this.showMovieDetail.bind(this)} />
+                                    })
+                                }
+                                </GridList>
+                            </div>
+                    }
+                </div>
             </div>
         )
     }

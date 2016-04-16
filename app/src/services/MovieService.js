@@ -3,9 +3,9 @@ import 'whatwg-fetch'
 let cachedMovies = null
 
 class MovieService {
-    static fetchMovies() {
+    static fetchMovies(fromCache) {
         return new Promise((resolve, reject) => {
-            if(cachedMovies) {
+            if(cachedMovies && fromCache) {
                 return resolve(cachedMovies)
             }
             
@@ -37,7 +37,8 @@ class MovieService {
     
     static searchMovieById(movieId) {
         return new Promise((resolve, reject) => {
-            MovieService.fetchMovies().then((movies) => {
+            let fromCache = true
+            MovieService.fetchMovies(fromCache).then((movies) => {
                 let searchedMovie = null
                 
                 movies.some((movie) => {
