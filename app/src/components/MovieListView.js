@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { browserHistory } from 'react-router'
+import browserHistory from 'react-router/lib/browserHistory'
 import MovieListViewStore from '../store/MovieListViewStore'
 import TabOrderBy from './TabOrderBy'
 import MovieItem from './MovieItem'

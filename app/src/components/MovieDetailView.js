@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { browserHistory, Link } from 'react-router'
+import Link from 'react-router/lib/Link'
+import browserHistory from 'react-router/lib/browserHistory'
 import MovieService from '../services/MovieService'
 
 import AppBar from 'material-ui/lib/app-bar'

@@ -1,5 +1,9 @@
 import React from 'react'
-import { Router, Route, IndexRoute, browserHistory, Link } from 'react-router'
+import Router from 'react-router/lib/Router'
+import Route from 'react-router/lib/Route'
+import IndexRoute from 'react-router/lib/IndexRoute'
+import browserHistory from 'react-router/lib/browserHistory'
+import MovieService from '../services/MovieService'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 
 import Layout from './Layout'

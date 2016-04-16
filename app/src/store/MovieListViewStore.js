@@ -1,6 +1,7 @@
 let defaultState = {
     movies: [],
-    orderBy: 'year'
+    orderBy: 'year',
+    loading: false
 };
 
 const STORE_NAME = 'MovieListViewStore'
