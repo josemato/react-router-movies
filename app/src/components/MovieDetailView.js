@@ -47,7 +47,9 @@ class MovieDetailView extends Component {
         }
         
         const goBackButton = (
-            <IconButton touch={true} onTouchStart={this.onGoBackClick.bind(this)}>
+            <IconButton touch={true} 
+                onTouchStart={this.onGoBackClick.bind(this)}
+                onFocus={this.onGoBackClick.bind(this)}>
                 <BackAction />
             </IconButton>
         )

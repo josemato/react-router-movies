@@ -8,6 +8,7 @@ import MovieUtils from '../lib/MovieUtils'
 
 import AppBar from 'material-ui/lib/app-bar'
 import GridList from 'material-ui/lib/grid-list/grid-list'
+import CircularProgress from 'material-ui/lib/circular-progress'
 
 let styles = {
     root: {
@@ -29,10 +30,21 @@ class MovieListView extends Component {
     }
     
     componentDidMount() {
+        this.setState({
+            loading: true
+        })
+        
         MovieService.fetchMovies().then((movies) => {
             this.setState({
-                movies: movies
+                movies: movies,
+                loading: false
             })
+        }).catch((err) => {
+            this.setState({
+                loading: false
+            })
+            
+            console.error('err fetching movies', err)
         })
     }
     
@@ -57,6 +69,7 @@ class MovieListView extends Component {
     render() {
         let movies = MovieUtils.orderBy(this.state.orderBy, this.state.movies)
 
+        console.log('loading', this.state.loading)
         return (
             <div styles={styles.root}>
                 <AppBar title="Movies App" showMenuIconButton={false} />
@@ -66,6 +79,12 @@ class MovieListView extends Component {
                     <TabOrderBy selectedTab={this.state.orderBy} onClick={this.onOrderByClick.bind(this)} text="Title" orderBy="title" />
                     <TabOrderBy selectedTab={this.state.orderBy} onClick={this.onOrderByClick.bind(this)} text="Rating" orderBy="rating" />
                 </div>
+                
+                {
+                    this.state.loading ?
+                        <CircularProgress mode="indeterminate" />
+                        : null
+                }
                 
                 <GridList cellHeight={200} style={styles.gridList}>
                 {
