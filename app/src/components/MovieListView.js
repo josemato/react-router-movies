@@ -9,6 +9,8 @@ import MovieUtils from '../lib/MovieUtils'
 import AppBar from 'material-ui/lib/app-bar'
 import GridList from 'material-ui/lib/grid-list/grid-list'
 import CircularProgress from 'material-ui/lib/circular-progress'
+import IconButton from 'material-ui/lib/icon-button'
+import RefreshButton from 'material-ui/lib/svg-icons/navigation/refresh'
 
 let styles = {
     root: {
@@ -38,7 +40,8 @@ class MovieListView extends Component {
             loading: true
         })
         
-        MovieService.fetchMovies().then((movies) => {
+        let fromCache = false
+        MovieService.fetchMovies(fromCache).then((movies) => {
             this.setState({
                 movies: MovieUtils.orderBy(this.state.orderBy, movies),
                 loading: false
@@ -78,9 +81,19 @@ class MovieListView extends Component {
     render() {
         let movies = this.state.movies
 
+        const refreshButton = (
+            <IconButton touch={true} onFocus={this.loadMovies.bind(this)}>
+                <RefreshButton />
+            </IconButton>
+        )
+
         return (
             <div styles={styles.root}>
-                <AppBar title="Movies App" showMenuIconButton={false} />
+                <AppBar 
+                    title="Movies App"
+                    iconElementRight={refreshButton} 
+                    onRightIconButtonTouchTap={this.loadMovies.bind(this)} 
+                    showMenuIconButton={false} />
                 
                 <div>
                     <TabOrderBy selectedTab={this.state.orderBy}  onClick={this.onOrderByClick.bind(this)} text="Year" orderBy="year" />
@@ -91,16 +104,15 @@ class MovieListView extends Component {
                 {
                     this.state.loading ?
                         <CircularProgress mode="indeterminate" />
-                        : null
+                        :
+                        <GridList cellHeight={200} style={styles.gridList}>
+                        {
+                            movies.map((movie) => {
+                                return <MovieItem key={`movie-${movie.id}`} movie={movie} onClick={this.showMovieDetail.bind(this)} />
+                            })
+                        }
+                        </GridList>
                 }
-                
-                <GridList cellHeight={200} style={styles.gridList}>
-                {
-                    movies.map((movie) => {
-                        return <MovieItem key={`movie-${movie.id}`} movie={movie} onClick={this.showMovieDetail.bind(this)} />
-                    })
-                }
-                </GridList>
             </div>
         )
     }

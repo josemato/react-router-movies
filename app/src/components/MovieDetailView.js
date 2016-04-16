@@ -10,7 +10,7 @@ import CardTitle from 'material-ui/lib/card/card-title'
 import CardText from 'material-ui/lib/card/card-text'
 import List from 'material-ui/lib/lists/list'
 import ListItem from 'material-ui/lib/lists/list-item'
-import IconButton from 'material-ui/lib/icon-button';
+import IconButton from 'material-ui/lib/icon-button'
 import BackAction from 'material-ui/lib/svg-icons/navigation/arrow-back'
 
 class MovieDetailView extends Component {
