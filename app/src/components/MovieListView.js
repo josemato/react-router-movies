@@ -30,13 +30,17 @@ class MovieListView extends Component {
     }
     
     componentDidMount() {
+        this.loadMovies()
+    }
+    
+    loadMovies() {
         this.setState({
             loading: true
         })
         
         MovieService.fetchMovies().then((movies) => {
             this.setState({
-                movies: movies,
+                movies: MovieUtils.orderBy(this.state.orderBy, movies),
                 loading: false
             })
         }).catch((err) => {
@@ -49,7 +53,12 @@ class MovieListView extends Component {
     }
     
     onOrderByClick(orderBy) {
+        if(orderBy === this.state.orderBy) {
+            return
+        }
+        
         this.setState({
+            movies: MovieUtils.orderBy(orderBy, this.state.movies),
             orderBy: orderBy
         })
     }
@@ -67,9 +76,8 @@ class MovieListView extends Component {
     }
     
     render() {
-        let movies = MovieUtils.orderBy(this.state.orderBy, this.state.movies)
+        let movies = this.state.movies
 
-        console.log('loading', this.state.loading)
         return (
             <div styles={styles.root}>
                 <AppBar title="Movies App" showMenuIconButton={false} />
