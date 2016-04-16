@@ -7,6 +7,7 @@ class TabOrderBy extends Component {
     }
     
     onTabClick(e) {
+        console.log('on tab order click');
         this.props.onClick(this.props.orderBy)
     }
     
@@ -14,7 +15,7 @@ class TabOrderBy extends Component {
         let selected = this.props.selectedTab === this.props.orderBy
         
         return (
-            <FlatButton primary={selected} secondary={!selected} onTouchStart={this.onTabClick.bind(this)}>{this.props.text}</FlatButton>
+            <FlatButton primary={selected} secondary={!selected} onFocus={this.onTabClick.bind(this)}>{this.props.text}</FlatButton>
         )
     }
 }
