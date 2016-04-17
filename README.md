@@ -5,6 +5,6 @@ Small Single Page Application (SPA) using React Router with Material UI.
 
 * `npm install`
 * `npm run build`
-* Open index.html on your browser using a webserver like apache, nginx or `php -S localhost:9000` 
+* Execute a webserver like `php -S localhost:9000` and visit [http://localhost:9000/](http://localhost:9000/) 
 
 **Tested using node v5.5.0**
