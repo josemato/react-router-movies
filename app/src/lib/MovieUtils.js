@@ -38,6 +38,18 @@ class MovieUtilsPrivate {
 }
 
 class MovieUtils {
+    static get ORDER_BY_YEAR() {
+        return 'year'
+    }
+    
+    static get ORDER_BY_TITLE() {
+        return ORDER_BY_TITLE
+    }
+    
+    static get ORDER_BY_RATING() {
+        return ORDER_BY_RATING
+    }
+    
     static orderBy(field, movies) {
         let orderedMovies = []
 

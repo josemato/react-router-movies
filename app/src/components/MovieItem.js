@@ -26,4 +26,14 @@ class MovieItem extends Component {
     }
 }
 
+MovieItem.propTypes = { 
+    movie: React.PropTypes.shape({
+        title: React.PropTypes.string.isRequired,
+        year: React.PropTypes.number.isRequired,
+        rating: React.PropTypes.string.isRequired,
+        poster: React.PropTypes.string.isRequired
+    }),
+    onClick: React.PropTypes.func.isRequired
+}
+
 export default MovieItem

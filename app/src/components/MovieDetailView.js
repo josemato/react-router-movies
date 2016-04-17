@@ -81,4 +81,20 @@ class MovieDetailView extends Component {
     }
 }
 
+MovieDetailView.propTypes = { 
+    movie: React.PropTypes.shape({
+        title: React.PropTypes.string.isRequired,
+        year: React.PropTypes.number.isRequired,
+        rating: React.PropTypes.string.isRequired,
+        poster: React.PropTypes.string.isRequired,
+        director: React.PropTypes.string.isRequired,
+        summary: React.PropTypes.string.isRequired,
+        actors: React.PropTypes.array.isRequired,
+    }),
+    params: React.PropTypes.shape({
+        id: React.PropTypes.string.isRequired,
+        title: React.PropTypes.string.isRequired
+    })
+}
+
 export default MovieDetailView

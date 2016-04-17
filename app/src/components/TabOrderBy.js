@@ -7,17 +7,20 @@ class TabOrderBy extends Component {
     }
     
     onTabClick(e) {
-        console.log('on tab order click');
         this.props.onClick(this.props.orderBy)
     }
     
     render() {
-        let selected = this.props.selectedTab === this.props.orderBy
-        
         return (
-            <FlatButton primary={selected} secondary={!selected} onFocus={this.onTabClick.bind(this)}>{this.props.text}</FlatButton>
+            <FlatButton primary={this.props.selected} secondary={!this.props.selected} onFocus={this.onTabClick.bind(this)}>{this.props.text}</FlatButton>
         )
     }
+}
+
+TabOrderBy.propTypes = {
+    selected: React.PropTypes.bool.isRequired,
+    text: React.PropTypes.string.isRequired,
+    onClick: React.PropTypes.func.isRequired
 }
 
 export default TabOrderBy

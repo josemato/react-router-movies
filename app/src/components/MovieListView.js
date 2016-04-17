@@ -109,9 +109,9 @@ class MovieListView extends Component {
                     showMenuIconButton={false} />
                 
                 <div>
-                    <TabOrderBy selectedTab={this.state.orderBy}  onClick={this.onOrderByClick.bind(this)} text="Year" orderBy="year" />
-                    <TabOrderBy selectedTab={this.state.orderBy} onClick={this.onOrderByClick.bind(this)} text="Title" orderBy="title" />
-                    <TabOrderBy selectedTab={this.state.orderBy} onClick={this.onOrderByClick.bind(this)} text="Rating" orderBy="rating" />
+                    <TabOrderBy selected={this.state.orderBy === MovieUtils.ORDER_BY_YEAR}  onClick={this.onOrderByClick.bind(this)} text="Year" orderBy={MovieUtils.ORDER_BY_YEAR} />
+                    <TabOrderBy selected={this.state.orderBy === MovieUtils.ORDER_BY_TITLE} onClick={this.onOrderByClick.bind(this)} text="Title" orderBy={MovieUtils.ORDER_BY_TITLE} />
+                    <TabOrderBy selected={this.state.orderBy === MovieUtils.ORDER_BY_RATING} onClick={this.onOrderByClick.bind(this)} text="Rating" orderBy={MovieUtils.ORDER_BY_RATING} />
                 </div>
                 
                 <div style={styles.contentWrapper}>
